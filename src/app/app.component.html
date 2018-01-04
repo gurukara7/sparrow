@@ -1,11 +1,148 @@
-<div class="container">
-    <h2>My Recruits</h2>
-    <ul class="list-group">
-        <li class="list-group-item" *ngFor="let recruit of recruits">
-            <span class="badge" style="background-color:#5cb85c;" *ngIf="recruit.joining">Joining</span>
-            <span class="badge" style="background-color:#f0ad4e;" *ngIf="!recruit.joining">Not Joining</span>
-            <h4 class="list-group-item-heading">{{ recruit.name }}</h4>
-            <p class="list-group-item-text">{{ recruit.number }}</p>
-        </li>
-    </ul>
+<div class="container" style="padding-right: 0;padding-left: 0;">
+    <div class="example-container mat-elevation-z8">
+        <mat-toolbar>
+            <span>My Recruits</span>
+            <span class="example-spacer"></span>
+            <button mat-raised-button (click)="addRecruits()">Add 
+                <mat-icon>add</mat-icon>
+            </button>
+        </mat-toolbar>
+        <div id="recuitsMobileView">
+            <!--<ul class="list-group">
+                <li class="list-group-item" *ngFor="let recruit of recruits">
+                    <span class="badge" style="background-color:#5cb85c;" *ngIf="recruit.joining">Joining</span>
+                    <span class="badge" style="background-color:#f0ad4e;" *ngIf="!recruit.joining">Not Joining</span>
+                    <h4 class="list-group-item-heading">{{ recruit.name }}</h4>
+                    <p class="list-group-item-text">{{ recruit.phone }}</p>
+                </li>
+            </ul>-->
+            <mat-table #table [dataSource]="dataSource_Mobile">
+
+                <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+                <!-- Position Column -->
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> <h4>{{element.name}}</h4><h6 style="margin-top:5px;margin-bottom:5px;">{{element.phone}} </h6> </mat-cell>
+                </ng-container>
+
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="status">
+                    <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span class="badge" style="background-color:#5cb85c;" *ngIf="element.joining">Joining</span>
+                        <span class="badge" style="background-color:#f0ad4e;" *ngIf="!element.joining">Not Joining</span>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns_Mobile"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns_Mobile;"></mat-row>
+            </mat-table>
+        </div>
+
+        <div id="recuitsDesktopView">
+            <mat-table #table [dataSource]="dataSource_Desktop">
+
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+                <!-- Position Column -->
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> <b>{{element.name}}</b></mat-cell>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="phone">
+                    <mat-header-cell *matHeaderCellDef> Phone </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.phone}} </mat-cell>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="email">
+                    <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="status">
+                    <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> 
+                        <span class="badge" style="background-color:#5cb85c;" *ngIf="element.joining">Joining</span>
+                        <span class="badge" style="background-color:#f0ad4e;" *ngIf="!element.joining">Not Joining</span>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns_Desktop"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns_Desktop;"></mat-row>
+            </mat-table>
+        </div>
+    </div>
+    <!--<h3>Basic Buttons</h3>
+    <div class="button-row">
+        <button mat-button>Basic</button>
+        <button mat-button color="primary">Primary</button>
+        <button mat-button color="accent">Accent</button>
+        <button mat-button color="warn">Warn</button>
+        <button mat-button disabled>Disabled</button>
+        <a mat-button routerLink=".">Link</a>
+    </div>
+
+    <h3>Raised Buttons</h3>
+    <div class="button-row">
+        <button mat-raised-button>Basic</button>
+        <button mat-raised-button color="primary">Primary</button>
+        <button mat-raised-button color="accent">Accent</button>
+        <button mat-raised-button color="warn">Warn</button>
+        <button mat-raised-button disabled>Disabled</button>
+        <a mat-raised-button routerLink=".">Link</a>
+    </div>
+
+    <h3>Icon Buttons</h3>
+    <div class="button-row">
+        <button mat-icon-button>
+            <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+        </button>
+        <button mat-icon-button color="primary">
+            <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+        </button>
+        <button mat-icon-button color="accent">
+            <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+        </button>
+        <button mat-icon-button color="warn">
+            <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+        </button>
+        <button mat-icon-button disabled>
+            <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+        </button>
+    </div>
+
+    <h3>Fab Buttons</h3>
+    <div class="button-row">
+        <button mat-fab>Basic</button>
+        <button mat-fab color="primary">Primary</button>
+        <button mat-fab color="accent">Accent</button>
+        <button mat-fab color="warn">Warn</button>
+        <button mat-fab disabled>Disabled</button>
+    
+        <button mat-fab  class="addcategorytoticketbutton">
+            <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+        </button>
+        <a mat-fab routerLink=".">Link</a>
+    </div>
+
+    <h3>Mini Fab Buttons</h3>
+    <div class="button-row">
+        <button mat-mini-fab>Basic</button>
+        <button mat-mini-fab color="primary">Primary</button>
+        <button mat-mini-fab color="accent">Accent</button>
+        <button mat-mini-fab color="warn">Warn</button>
+        <button mat-mini-fab disabled>Disabled</button>
+        <button mat-mini-fab>
+            <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+        </button>
+        <a mat-mini-fab routerLink=".">Link</a>
+    </div>-->
 </div>

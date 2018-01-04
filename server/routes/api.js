@@ -6,7 +6,8 @@ const Schema = mongoose.Schema;
 // create a schema
 var recruitSchema = new Schema({
     name: String,
-    number: Number,
+    phone: Number,
+    email: String,
     joining: Boolean
 });
 
