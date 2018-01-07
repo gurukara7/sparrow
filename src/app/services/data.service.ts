@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { Recruit } from './models/recruit.model';
+import { Recruit } from '../models/recruit.model';
 
 @Injectable()
 export class DataService {
@@ -12,7 +12,15 @@ export class DataService {
 
     getRecruits(): Observable<Recruit[]> {
         //return this._http.get("/api/recruits").map(result => this.result = result.json());
-        return this._http.get<Recruit[]>("/api/recruits");
+        return this._http.get<Recruit[]>('/api/recruits');
+    }
+    
+    addRecruit(newRecruit: Recruit) : Observable<Recruit> {
+         //console.log('called add recruit');
+         var headersObj = new HttpHeaders();
+         headersObj.append('Content-Type', 'application/json');
+         //return this._http.get<Recruit>('/api/recruits');
+         return this._http.post<Recruit>('/api/recruit', newRecruit, { headers : headersObj } );
     }
 }
 
