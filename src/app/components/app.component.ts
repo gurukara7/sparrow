@@ -39,7 +39,8 @@ export class AppComponent {
 
         dialogRef.afterClosed().subscribe(result => {
             if(result){
-                //this.dataSource_Desktop..da.dataChange.value.push(this._dataService.getData());
+                this.dataSource_Desktop = new UserDataSource(this._dataService);
+                this.dataSource_Mobile = new UserDataSource(this._dataService);
             }
         });
     }
