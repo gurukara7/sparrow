@@ -1,0 +1,28 @@
+.login-container
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(to bottom right, rgb(219, 219, 219), rgb(255, 255, 255));
+}
+
+.login-card
+{
+  width: 400px;
+  height: 500px; 
+}
+
+
+.login-contents {
+    display: flex;
+    flex-direction: column;
+}
+.login-contents > * {
+    width: 100%;
+}
+
+.login-actions {
+    float: right;
+    margin: 0 10px 0 10px;
+}

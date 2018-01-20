@@ -5,3 +5,9 @@ export interface Recruit {
     email: string;
     joining: boolean;
 }
+
+export interface Token {
+    success: boolean;
+    message: string;
+    token: string;
+}

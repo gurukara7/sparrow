@@ -9,11 +9,10 @@ import { AddRecruitComponent} from '../components/addRecruit.component';
 import { HttpModule } from '@angular/http';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css']
 })
-export class AppComponent {
+export class HomeComponent {
     //title = "Guru";
     // Define a users property to hold our user data
     //recruits = [{"_id":"5a44c0e0734d1d45eaf35204","name":"Guru","number":9480614620,"joining":false},{"_id":"5a44e9a3734d1d45eaf3657c","name":"Raja","number":9480614621,"joining":true}];
