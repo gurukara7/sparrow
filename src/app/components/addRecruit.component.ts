@@ -1,6 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { DataService } from '../services/data.service';
+import { AuthService } from '../auth/auth.service';
 import { Recruit } from '../models/recruit.model';
 
 @Component({
@@ -9,14 +10,10 @@ import { Recruit } from '../models/recruit.model';
 })
 export class AddRecruitComponent {
 
-    // name: string;
-    // phone: string;
-    // email: string;
-    // DOJ: Date;
-    // newRecruit: any;
     errorMessage: string;
 
     constructor(private dialogRef: MatDialogRef<AddRecruitComponent>, 
+                private _authService: AuthService,
         @Inject(MAT_DIALOG_DATA) private data: any, private _dataService: DataService) { }
 
     ngOnInit() {
@@ -32,10 +29,15 @@ export class AddRecruitComponent {
             phone : this.data.phone,
             email : this.data.email,
             joining: true,
-            DOJ: this.data.DOJ
+            DOJ: this.data.DOJ,
+            addedByUserID: this._authService.getCurrentUserID()
         };
 
-        this._dataService.addRecruit(newRecruit).subscribe((returnedValue) => { return this.dialogRef.close(returnedValue); }, 
-            error => this.errorMessage = error.message);   
-        }
+        this._dataService.addRecruit(newRecruit).subscribe(
+            (returnedValue) => { 
+                return this.dialogRef.close(returnedValue); 
+            }, 
+            error => this.errorMessage = error.message
+        );   
+    }
 }

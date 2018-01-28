@@ -1,3 +1,14 @@
 <div>
+    <mat-toolbar *ngIf="showOptions" color="primary" class="pageToolBar"> 
+        <span style="font-size: 18pt">HR Network</span>
+        <span class="example-spacer"></span>
+        <span *ngIf="showOptions" class="displayName"> {{ currentUserName }} </span>
+        <button *ngIf="showOptions" mat-icon-button (click)="updateProfile()" matTooltip="Profile Setting">
+            <mat-icon>account_circle</mat-icon>
+        </button>
+        <button *ngIf="showOptions" mat-icon-button (click)="logOutClick()" style="float:right" matTooltip="Logout">
+            <mat-icon>power_settings_new</mat-icon>
+        </button>
+    </mat-toolbar>
     <router-outlet></router-outlet>
 </div>

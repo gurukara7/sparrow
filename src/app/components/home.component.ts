@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { DataService } from '../services/data.service';
+import { AuthService } from '../auth/auth.service';
 import { MatTableDataSource, MatDialog} from '@angular/material';
 import { DataSource } from '@angular/cdk/collections';
 import { Recruit } from '../models/recruit.model';
@@ -13,19 +14,15 @@ import { HttpModule } from '@angular/http';
     styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-    //title = "Guru";
-    // Define a users property to hold our user data
-    //recruits = [{"_id":"5a44c0e0734d1d45eaf35204","name":"Guru","number":9480614620,"joining":false},{"_id":"5a44e9a3734d1d45eaf3657c","name":"Raja","number":9480614621,"joining":true}];
-    //recruits: Recruit[] = [];
-    dataSource_Desktop = new UserDataSource(this._dataService);
+    dataSource_Desktop = new UserDataSource(this.dataService, this.authService );
     displayedColumns_Desktop = ['name', 'phone', 'email', 'status'];
 
-    dataSource_Mobile = new UserDataSource(this._dataService);
+    dataSource_Mobile = new UserDataSource(this.dataService, this.authService);
     displayedColumns_Mobile = ['name', 'status'];
 
     //// Create an instance of the DataService through dependency injection
     //constructor(private _dataService: DataService) {
-    constructor(private _dataService: DataService, private dialog: MatDialog) {
+    constructor(private dataService: DataService, private authService: AuthService, private dialog: MatDialog) {
         //this._dataService.getRecruits()
         //    .subscribe(res => this.recruits = res);
     }
@@ -38,19 +35,19 @@ export class HomeComponent {
 
         dialogRef.afterClosed().subscribe(result => {
             if(result){
-                this.dataSource_Desktop = new UserDataSource(this._dataService);
-                this.dataSource_Mobile = new UserDataSource(this._dataService);
+                this.dataSource_Desktop = new UserDataSource(this.dataService, this.authService);
+                this.dataSource_Mobile = new UserDataSource(this.dataService, this.authService);
             }
         });
     }
 }
 
 export class UserDataSource extends DataSource<any> {
-    constructor(private _dataService: DataService) {
+    constructor(private dataService: DataService, private authService: AuthService,) {
         super();
     }
     connect(): Observable<Recruit[]> {
-        return this._dataService.getRecruits();
+        return this.dataService.getRecruits(this.authService.getCurrentUserID());
     }
     disconnect() { }
 }

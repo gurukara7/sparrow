@@ -16,17 +16,17 @@ import { HttpModule } from '@angular/http';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-    private usernameString: String;
-    private passwrodString: String;
+    private usernameString: string;
+    private passwrodString: string;
     private errorMessage: string;
 
-    constructor(private _dataService: DataService, private _authService: AuthService,  private _router: Router) {
+    constructor(private dataService: DataService, private authService: AuthService, private router: Router) {
     }
 
     onLoginClick() : void {
-        this._dataService.userLogin(this.usernameString, this.passwrodString).subscribe((returnedValue) => { 
-            this._authService.setToken(returnedValue.token);
-            this._router.navigate(['/home'], { });
+        this.dataService.userLogin(this.usernameString, this.passwrodString).subscribe((returnedValue) => { 
+            this.authService.setUser(returnedValue);
+            this.router.navigate(['/home'], { });
         }, 
         error =>  this.errorMessage = error.error.message);   
     }

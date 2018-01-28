@@ -8,7 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppRouting } from './app.routing';
 
-import { LoginComponent, HomeComponent, AddRecruitComponent } from './components/index';
+import { LoginComponent, HomeComponent, AddRecruitComponent, UserProfileComponent } from './components/index';
 import { AuthService } from './auth/auth.service';
 import { DataService } from './services/index';
 import { AuthGuard, InterceptorModule } from './auth/index';
@@ -19,7 +19,8 @@ import { AuthGuard, InterceptorModule } from './auth/index';
       AppComponent,
       HomeComponent,
       LoginComponent,
-      AddRecruitComponent
+      AddRecruitComponent,
+      UserProfileComponent
   ],
   imports: [
       BrowserModule,
@@ -34,6 +35,6 @@ import { AuthGuard, InterceptorModule } from './auth/index';
       AuthService,
       AuthGuard],
   bootstrap: [AppComponent],
-  entryComponents: [AddRecruitComponent]
+  entryComponents: [AddRecruitComponent, UserProfileComponent]
 })
 export class AppModule { }

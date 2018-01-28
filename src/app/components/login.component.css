@@ -7,13 +7,6 @@
   background: linear-gradient(to bottom right, rgb(219, 219, 219), rgb(255, 255, 255));
 }
 
-.login-card
-{
-  width: 400px;
-  height: 500px; 
-}
-
-
 .login-contents {
     display: flex;
     flex-direction: column;
@@ -25,4 +18,21 @@
 .login-actions {
     float: right;
     margin: 0 10px 0 10px;
+}
+
+
+@media screen and (max-width: 400px) {   
+    .login-card
+    {
+    width: 340px;
+    height: 460px; 
+    }
+}
+
+@media screen and (min-width: 401px) {
+    .login-card
+    {
+      width: 400px;
+      height: 500px; 
+    }
 }

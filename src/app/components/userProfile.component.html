@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>{{fullName}} Profile</h1>
+<div mat-dialog-content>
+    <div class="example-container">
+        <mat-form-field>
+            <input matInput [(ngModel)]="userName" disabled  placeholder="Username">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput [(ngModel)]="firstName" placeholder="First Name">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput [(ngModel)]="lastName" placeholder="Last Name">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput [(ngModel)]="email" placeholder="Email">
+        </mat-form-field>
+
+        <mat-chip color="accent" selected="true">{{ errorMessage }}</mat-chip>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button (click)="onSaveClick()" cdkFocusInitial>Save</button>
+</div>

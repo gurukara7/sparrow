@@ -11,3 +11,13 @@ export interface Token {
     message: string;
     token: string;
 }
+
+export interface User {
+    userID: Number;
+    userName: string;
+    firstName: string;
+    lastName: string;
+    fullName: string;
+    email: string;
+    token: string;
+}
